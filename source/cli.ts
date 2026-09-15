@@ -1,9 +1,9 @@
 import { parseArgs, type ParseArgsConfig } from 'node:util'
 import { ApiRequestError, type ApiErrorCode } from '@dotpm/api/contract'
 import { HttpApi } from '@dotpm/api/client'
-import { ConnectionError, resolveConnection, type Connection } from './connection'
-import { bridge } from './mcp'
-import { render, type Output } from './render'
+import { ConnectionError, resolveConnection, type Connection } from './connection.ts'
+import { bridge } from './mcp.ts'
+import { render, type Output } from './render.ts'
 
 export interface CliDeps {
   env: Record<string, string | undefined>

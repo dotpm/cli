@@ -1,2 +1,25 @@
-node_modules/
-dist/
+## Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+## OS X
+.DS_Store
+._*
+
+## Editors and IDE
+*.sublime*
+*.code-workspace
+
+## Node.js
+node_modules
+*.log
+
+## Build
+build
+
+## Coverage reports
+coverage
+
+## API keys and secrets
+.env
