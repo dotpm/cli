@@ -1,11 +1,12 @@
+import { join, resolve } from 'node:path'
 import { createRouter } from '@dotpm/api'
 import { FakeApi } from '@dotpm/api/testing'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { runCli, type CliDeps } from './cli.ts'
 
 const TOKEN = 'secret-token-0123456789'
-const VAULT = '/vault'
-const SETTINGS = `${VAULT}/.obsidian/plugins/project-manager/data.json`
+const VAULT = resolve('/vault')
+const SETTINGS = join(VAULT, '.obsidian', 'plugins', 'project-manager', 'data.json')
 
 interface Run {
   code: number
@@ -40,10 +41,10 @@ describe('runCli', () => {
     }
     const deps: CliDeps = {
       env,
-      cwd: `${VAULT}/Projects`,
+      cwd: join(VAULT, 'Projects'),
       tty,
       version: '1.2.3',
-      exists: (path) => path === `${VAULT}/.obsidian` || path in files,
+      exists: (path) => path === join(VAULT, '.obsidian') || path in files,
       readFile: (path) => files[path] ?? null,
       readStdin: async () => stdin,
       stdinLines: async function* () {},

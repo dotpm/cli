@@ -1,14 +1,16 @@
+import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { resolveConnection, type ConnectionInput } from './connection.ts'
 
-const VAULT = '/home/me/Notes'
-const SETTINGS = `${VAULT}/.obsidian/plugins/project-manager/data.json`
+const VAULT = resolve('/home/me/Notes')
+const SETTINGS = join(VAULT, '.obsidian', 'plugins', 'project-manager', 'data.json')
+const ELSEWHERE = resolve('/elsewhere')
 
 function input(overrides: Partial<ConnectionInput> = {}, files: Record<string, string> = {}): ConnectionInput {
-  const present = new Set([`${VAULT}/.obsidian`, ...Object.keys(files)])
+  const present = new Set([join(VAULT, '.obsidian'), ...Object.keys(files)])
   return {
     env: {},
-    cwd: `${VAULT}/Projects/Website_tasks`,
+    cwd: join(VAULT, 'Projects', 'Website_tasks'),
     exists: (path) => present.has(path),
     readFile: (path) => files[path] ?? null,
     ...overrides
@@ -40,13 +42,17 @@ describe('resolveConnection', () => {
   })
 
   it('reads a vault named by flag or environment', () => {
-    expect(resolveConnection(input({ vault: VAULT, cwd: '/elsewhere' }, { [SETTINGS]: ON })).token).toBe('tok')
-    expect(resolveConnection(input({ env: { DOTPM_VAULT: VAULT }, cwd: '/' }, { [SETTINGS]: ON })).token).toBe('tok')
-    expect(() => resolveConnection(input({ vault: '/nope' }, { [SETTINGS]: ON }))).toThrow('not an Obsidian vault')
+    expect(resolveConnection(input({ vault: VAULT, cwd: ELSEWHERE }, { [SETTINGS]: ON })).token).toBe('tok')
+    expect(resolveConnection(input({ env: { DOTPM_VAULT: VAULT }, cwd: resolve('/') }, { [SETTINGS]: ON })).token).toBe(
+      'tok'
+    )
+    expect(() => resolveConnection(input({ vault: resolve('/nope') }, { [SETTINGS]: ON }))).toThrow(
+      'not an Obsidian vault'
+    )
   })
 
   it('explains what is missing in a vault', () => {
-    expect(() => resolveConnection(input({ cwd: '/tmp' }))).toThrow('no Obsidian vault holds /tmp')
+    expect(() => resolveConnection(input({ cwd: ELSEWHERE }))).toThrow(`no Obsidian vault holds ${ELSEWHERE}`)
     expect(() => resolveConnection(input())).toThrow('dotpm is not installed')
     expect(() => resolveConnection(input({}, { [SETTINGS]: '{oops' }))).toThrow('could not be read')
     expect(() => resolveConnection(input({}, { [SETTINGS]: '{"localApiEnabled":false}' }))).toThrow(
