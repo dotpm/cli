@@ -97,7 +97,7 @@ describe('runCli', () => {
     expect(task.out).toContain('title       First')
     const status = await run(['status'])
     expect(status.out).toContain('server  dotpm 9.9.9')
-    expect(status.out).toContain('from    the vault at /vault')
+    expect(status.out).toContain(`from    the vault at ${VAULT}`)
     expect((await run(['--json', 'status'])).json).toMatchObject({ ok: true, url: 'http://127.0.0.1:27151' })
   })
 
