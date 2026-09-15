@@ -1,7 +1,7 @@
 import { createRouter } from '@dotpm/api'
 import { FakeApi } from '@dotpm/api/testing'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { runCli, type CliDeps } from './cli'
+import { runCli, type CliDeps } from './cli.ts'
 
 const TOKEN = 'secret-token-0123456789'
 const VAULT = '/vault'

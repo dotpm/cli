@@ -2,39 +2,67 @@
   "name": "@dotpm/cli",
   "version": "0.1.0",
   "description": "Command line for dotpm, the Obsidian project manager: list, search and edit tasks from a terminal or an agent",
-  "keywords": ["cli", "mcp", "obsidian", "project-management", "tasks"],
+  "keywords": [
+    "cli",
+    "mcp",
+    "obsidian",
+    "project-management",
+    "tasks"
+  ],
   "homepage": "https://github.com/dotpm/cli#readme",
+  "bugs": {
+    "url": "https://github.com/dotpm/cli/issues"
+  },
   "license": "MIT",
-  "repository": "github:dotpm/cli",
-  "bin": { "dotpm": "./dist/dotpm.js" },
-  "files": ["dist"],
+  "author": "dotpm (https://dotpm.pm)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotpm/cli.git"
+  },
+  "bin": {
+    "dotpm": "./build/dotpm.js"
+  },
+  "files": [
+    "build"
+  ],
   "type": "module",
-  "publishConfig": { "access": "public" },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsdown",
     "check": "run-p check:**",
-    "check:code": "oxlint ./src",
-    "check:format": "oxfmt --check ./src",
-    "check:types": "tsc -noEmit -skipLibCheck",
+    "check:code": "oxlint ./source",
+    "check:format": "oxfmt --check ./source",
+    "check:types": "tsc --noEmit",
     "fix": "run-p fix:**",
-    "fix:code": "oxlint --fix ./src",
-    "fix:format": "oxfmt ./src",
+    "fix:code": "oxlint --fix ./source",
+    "fix:format": "oxfmt ./source",
+    "prepublishOnly": "run-s build",
+    "preversion": "run-s check test build",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@2bad/axiom": "2.1.0",
     "@2bad/tsconfig": "4.0.0",
     "@dotpm/api": "0.1.0",
-    "@types/node": "26.4.1",
+    "@types/node": "26.5.1",
+    "@vitest/coverage-v8": "5.0.0",
     "npm-run-all2": "9.0.3",
-    "oxfmt": "0.66.0",
-    "oxlint": "1.81.0",
+    "oxfmt": "0.68.0",
+    "oxlint": "1.83.0",
+    "publint": "0.3.24",
     "tsdown": "0.23.0",
-    "typescript": "6.0.3",
+    "typescript": "7.0.2",
     "vitest": "5.0.0"
   },
-  "packageManager": "pnpm@11.5.3",
-  "engines": { "node": ">=22" },
-  "volta": { "node": "24.15.0", "pnpm": "11.5.3" }
+  "engines": {
+    "node": ">=22"
+  },
+  "volta": {
+    "node": "26.8.1",
+    "pnpm": "11.27.0"
+  },
+  "packageManager": "pnpm@11.27.0"
 }

@@ -124,7 +124,7 @@ The same tools and resources are served either way.
 
 ## Contributing
 
-Bug reports and feature requests go in [issues](https://github.com/dotpm/cli/issues). The package builds with `pnpm build`, and `pnpm check` and `pnpm test` are what CI runs. The API contract it talks to is [`@dotpm/api`](https://github.com/dotpm/obsidian-pm/tree/main/packages/api), released from the plugin repository.
+Bug reports and feature requests go in [issues](https://github.com/dotpm/cli/issues). The package builds with `pnpm build` into `build/`, and `pnpm check` and `pnpm test:coverage` are what CI runs on Linux and Windows. The API contract it talks to is [`@dotpm/api`](https://github.com/dotpm/obsidian-pm/tree/main/packages/api), released from the plugin repository.
 
 ## License
 

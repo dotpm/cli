@@ -3,7 +3,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { createInterface } from 'node:readline'
 import { setTimeout as delay } from 'node:timers/promises'
-import { runCli } from './cli'
+import { runCli } from './cli.ts'
 
 function readFile(path: string): string | null {
   try {
@@ -35,6 +35,12 @@ process.exitCode = await runCli(process.argv.slice(2), {
   stdout: (text) => process.stdout.write(`${text}\n`),
   stderr: (text) => process.stderr.write(`${text}\n`),
   fetch: (request) => fetch(request),
-  sleep: (ms) => delay(ms, undefined, { signal: interrupt.signal }).catch(() => undefined),
+  sleep: async (ms) => {
+    try {
+      await delay(ms, undefined, { signal: interrupt.signal })
+    } catch {
+      return undefined
+    }
+  },
   signal: interrupt.signal
 })

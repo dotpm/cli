@@ -1,7 +1,7 @@
 import { createRouter } from '@dotpm/api'
 import { FakeApi } from '@dotpm/api/testing'
 import { describe, expect, it } from 'vitest'
-import { bridge } from './mcp'
+import { bridge } from './mcp.ts'
 
 const TOKEN = 'secret-token-0123456789'
 

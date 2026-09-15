@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { resolveConnection, type ConnectionInput } from './connection'
+import { resolveConnection, type ConnectionInput } from './connection.ts'
 
 const VAULT = '/home/me/Notes'
 const SETTINGS = `${VAULT}/.obsidian/plugins/project-manager/data.json`

@@ -1,20 +1,15 @@
 {
   "extends": "@2bad/tsconfig",
-  "include": ["src/**/*.ts"],
+  "include": ["source/**/*", "vitest.config.ts", "tsdown.config.ts"],
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "lib": ["ES2022"],
     "types": ["node"],
-    "isolatedModules": true,
-    "erasableSyntaxOnly": false,
     "noEmit": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": false,
     "exactOptionalPropertyTypes": false,
     "noUncheckedIndexedAccess": false,
     "noPropertyAccessFromIndexSignature": false,
-    "noImplicitOverride": false
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   }
 }
