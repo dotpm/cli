@@ -1,6 +1,6 @@
 {
   "name": "@dotpm/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Command line for dotpm, the Obsidian project manager: list, search and edit tasks from a terminal or an agent",
   "keywords": [
     "cli",
