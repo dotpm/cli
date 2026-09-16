@@ -141,9 +141,10 @@ dotpm --url http://127.0.0.1:27140 --token <token> status
 
 | Command | Does |
 | --- | --- |
-| `projects` | List every project |
+| `projects [--archived]` | List every project |
 | `project <id> [--tasks] [--archived]` | One project: team, custom fields, allowed status and priority ids |
 | `create-project --title <text>` | New project at the root or under `--parent` |
+| `archive-project <id> [--restore]` | Archive a project and its sub-projects, or bring it back |
 | `tasks <projectId> [--archived]` | A project's tasks in tree order |
 | `task <id>` | One task with its description |
 | `search [text] [--project] [--status] [--assignee] [--archived] [--limit]` | Tasks across every project |

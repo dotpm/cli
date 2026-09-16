@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added the `archive-project` command to archive a project with its sub-projects, or restore it with `--restore`
+- Added `--archived` to `projects`; archived projects are left out otherwise
+
 ## [0.1.1] - 2026-09-15
 
 ### Changed

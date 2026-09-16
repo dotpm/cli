@@ -55,6 +55,7 @@ function project(value: ProjectResource & { tasks?: TaskResource[] }): string {
     ['title', value.title],
     ['path', value.path],
     ['parent', value.parentId ?? ''],
+    ['archived', value.archived ? 'yes' : 'no'],
     ['tasks', `${value.doneCount} of ${value.taskCount} done`],
     ['team', value.teamMembers.join(', ')],
     ['statuses', value.statuses.map((status) => status.id).join(', ')],
@@ -108,7 +109,12 @@ export function render(output: Output): string {
         ? 'no projects'
         : table(
             ['ID', 'TASKS', 'TITLE', 'PATH'],
-            output.value.map((p) => [p.id, `${p.doneCount}/${p.taskCount}`, p.title, p.path])
+            output.value.map((p) => [
+              p.id,
+              `${p.doneCount}/${p.taskCount}`,
+              `${p.title}${p.archived ? ' (archived)' : ''}`,
+              p.path
+            ])
           )
     case 'project':
       return project(output.value)
