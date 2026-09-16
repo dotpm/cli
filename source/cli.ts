@@ -189,8 +189,11 @@ const COMMANDS: Record<string, Command> = {
   projects: {
     args: '',
     summary: 'List every project',
-    flags: {},
-    run: async ({ api }) => ({ kind: 'projects', value: await api.listProjects() })
+    flags: { archived: { type: 'boolean', help: 'Include archived projects' } },
+    run: async ({ api }, _positionals, values) => ({
+      kind: 'projects',
+      value: await api.listProjects(values['archived'] === true)
+    })
   },
   project: {
     args: '<projectId>',
@@ -240,6 +243,15 @@ const COMMANDS: Record<string, Command> = {
       if (parent !== undefined) body['parentId'] = parent
       return { kind: 'project', value: await api.createProject(body) }
     }
+  },
+  'archive-project': {
+    args: '<projectId>',
+    summary: 'Archive a project and its sub-projects, or bring it back',
+    flags: { restore: { type: 'boolean', help: 'Unarchive instead' } },
+    run: async ({ api }, positionals, values) => ({
+      kind: 'project',
+      value: await api.archiveProject(need(positionals, 0, 'projectId'), values['restore'] !== true)
+    })
   },
   tasks: {
     args: '<projectId>',

@@ -46,7 +46,7 @@
   "devDependencies": {
     "@2bad/axiom": "2.1.0",
     "@2bad/tsconfig": "4.0.0",
-    "@dotpm/api": "0.1.0",
+    "@dotpm/api": "0.2.0",
     "@types/node": "26.5.1",
     "@vitest/coverage-v8": "5.0.0",
     "npm-run-all2": "9.0.3",
