@@ -166,6 +166,18 @@ describe('runCli', () => {
     expect(JSON.parse(matched.err)).toEqual({ error: { code: 'conflict', message: 'task changed' } })
   })
 
+  it('archives a project and lists archived projects only when asked', async () => {
+    expect((await run(['archive-project', 'p1'])).json).toMatchObject({ id: 'p1', archived: true })
+    expect(host.calls.at(-1)).toBe('archiveProject p1 true')
+    expect((await run(['projects'])).json).toEqual([])
+    expect((await run(['projects', '--archived'])).json).toMatchObject([{ id: 'p1', archived: true }])
+    tty = true
+    expect((await run(['projects', '--archived'])).out).toContain('Demo (archived)')
+    expect((await run(['project', 'p1'])).out).toContain('archived    yes')
+    expect((await run(['--json', 'archive-project', 'p1', '--restore'])).json).toMatchObject({ archived: false })
+    expect((await run(['projects'])).out).toContain('p1  1/2    Demo')
+  })
+
   it('moves, archives and deletes', async () => {
     await run(['move', 't2', '--top', '--after', 't1'])
     expect(host.calls.at(-1)).toBe('moveTask t2 {"parentId":null,"after":"t1"}')

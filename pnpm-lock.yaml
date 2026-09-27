@@ -15,8 +15,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0(typescript@7.0.2)
       '@dotpm/api':
-        specifier: 0.1.0
-        version: 0.1.0(typescript@7.0.2)
+        specifier: 0.2.0
+        version: 0.2.0(typescript@7.0.2)
       '@types/node':
         specifier: 26.5.1
         version: 26.5.1
@@ -80,11 +80,11 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@dotpm/api@0.1.0':
-    resolution: {integrity: sha512-BGMEKuUZMnLIUqpCj4sKZs7PDMsIX660uowFuZeBHcQ42Yhep/w700LDXQpb5tombm/Tqw/Z3v2zBTl+uVMC8A==}
+  '@dotpm/api@0.2.0':
+    resolution: {integrity: sha512-ZyL7UMQwV2eXIWx/gjR1MJD8azVLjifLgMnlgCHAPMMfskJC80zweHlgtGVkV4hV6DxaOD7+Ul43m5lCYzVUIg==}
 
-  '@dotpm/core@0.1.0':
-    resolution: {integrity: sha512-cmNpUAAOTAK7NZbIp/HiX9jWqx3p+2JVFaGqzEP42727QJ7O5tdfxbMZgpOnKsaqlDbccGkOmts/+vn8ah5wRA==}
+  '@dotpm/core@0.2.0':
+    resolution: {integrity: sha512-r+WAfNrFan2dnlgAczco2/hX+I0EHbErpxMtl/VL/I1dFA/sZCE/vidn982FT4PuiN0ryJph2GlwcPaptLgk3A==}
 
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
@@ -1304,9 +1304,9 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@dotpm/api@0.1.0(typescript@7.0.2)':
+  '@dotpm/api@0.2.0(typescript@7.0.2)':
     dependencies:
-      '@dotpm/core': 0.1.0
+      '@dotpm/core': 0.2.0
       '@valibot/to-json-schema': 1.7.1(valibot@1.4.2(typescript@7.0.2))
       hono: 4.13.7
       mcp-lite: 0.10.0
@@ -1314,7 +1314,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@dotpm/core@0.1.0':
+  '@dotpm/core@0.2.0':
     dependencies:
       temporal-polyfill: 1.0.4
 

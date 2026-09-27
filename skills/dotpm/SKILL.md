@@ -11,7 +11,8 @@ Projects and tasks in this vault are Markdown notes managed by the dotpm Obsidia
 
 - Don't create, edit, rename, move or delete notes in a `_tasks` folder, and don't edit a project note's frontmatter, even with file access. The plugin keeps ids, parent and subtask links, positions and the archive folder in step across several notes. A hand edit breaks that.
 - Read the project before writing to it. `get_project` lists the status and priority ids its tasks may carry, plus its custom fields and team. Use only those ids. Don't assume `done` or `high` exist.
-- `create_project` is the only project write. It starts with the global statuses and priorities. Renaming a project or changing its palettes and custom fields is done in Obsidian.
+- `create_project` and `archive_project` are the only project writes. A new project starts with the global statuses and priorities. Renaming a project or changing its palettes and custom fields is done in Obsidian.
+- Archiving a project takes its sub-projects with it, and `list_projects` leaves archived projects out unless `includeArchived` (`--archived`) is set. Only the project that was archived itself can be brought back; a sub-project follows its parent.
 - Take ids from earlier results. Don't build ids or paths yourself.
 - A refused write names the allowed values. Fix the call and retry. Don't edit the note instead.
 - `assignees`, `tags` and `dependencies` replace the whole list. To add one tag, send every tag the task should have.
@@ -25,7 +26,7 @@ Projects and tasks in this vault are Markdown notes managed by the dotpm Obsidia
 1. `list_projects` to find the project, or `create_project` when it does not exist yet, at the root or under `parentId`.
 2. `get_project` for its status ids, priority ids, custom fields and team.
 3. Find the tasks. `list_tasks` when you know the project and need the tree, with `parentId` and `position`. `search_tasks` when you only have a title, a status or an assignee, or the project is unknown. `get_task` only when you need the description. Both lists leave archived tasks out unless `includeArchived` (`--archived`) is set.
-4. Make the change. `create_task` for a new task, at the top level or under `parentId`. `update_task` to change fields in place. `move_task` to re-parent (`parentId`, null for top level), move to another project or reorder among siblings with `before` or `after`. `archive_task` to take a task and its subtasks out of the way, `archived: false` to bring them back.
+4. Make the change. `create_task` for a new task, at the top level or under `parentId`. `update_task` to change fields in place. `move_task` to re-parent (`parentId`, null for top level), move to another project or reorder among siblings with `before` or `after`. `archive_task` to take a task and its subtasks out of the way, `archived: false` to bring them back. `archive_project` when a whole project is done or no longer relevant.
 5. Tell the user what changed, by task title.
 
 ## Commands
@@ -34,9 +35,10 @@ The same operations from a terminal:
 
 | MCP tool | Command |
 | --- | --- |
-| `list_projects` | `dotpm projects` |
+| `list_projects` | `dotpm projects [--archived]` |
 | `get_project` | `dotpm project <projectId>` |
 | `create_project` | `dotpm create-project --title <text> [--description <markdown>] [--icon <emoji>] [--color <hex>] [--member <person>]... [--parent <projectId>]` |
+| `archive_project` | `dotpm archive-project <projectId> [--restore]` |
 | `list_tasks` | `dotpm tasks <projectId>` |
 | `get_task` | `dotpm task <taskId>` |
 | `search_tasks` | `dotpm search [text] [--project <id>] [--status <id>] [--assignee <person>]` |
